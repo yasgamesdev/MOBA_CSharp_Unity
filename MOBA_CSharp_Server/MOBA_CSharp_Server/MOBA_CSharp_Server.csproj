@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A85AB64B-E8DD-4078-B79F-7F4B3391FA6B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MOBA_CSharp_Server</RootNamespace>
+    <AssemblyName>MOBA_CSharp_Server</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ENet-CSharp">
+      <HintPath>Library\Network\ENet-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoAPI">
+      <HintPath>Library\Math2D\GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagePack, Version=1.7.3.4, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.1.7.3.4\lib\net45\MessagePack.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite">
+      <HintPath>Library\Math2D\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\Pathfinding\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpNav">
+      <HintPath>Library\Pathfinding\SharpNav.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet">
+      <HintPath>Library\Pathfinding\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Game\Client\ClientManagerEntity.cs" />
+    <Compile Include="Game\Collision\CollisionEntity.cs" />
+    <Compile Include="Game\Config\ConfigEntity.cs" />
+    <Compile Include="Game\Enum\AnimationType.cs" />
+    <Compile Include="Game\Enum\Team.cs" />
+    <Compile Include="Game\Factory\FactoryEntity.cs" />
+    <Compile Include="Game\Json\CircleJson.cs" />
+    <Compile Include="Game\Json\EdgeJson.cs" />
+    <Compile Include="Game\Json\MapJson.cs" />
+    <Compile Include="Game\Json\PolyJson.cs" />
+    <Compile Include="Game\Network\NetworkEntity.cs" />
+    <Compile Include="Game\Pathfinding\PathfindingEntity.cs" />
+    <Compile Include="Game\Root\GameEntity.cs" />
+    <Compile Include="Game\UnitManager\UnitManagerEntity.cs" />
+    <Compile Include="Game\Unit\Components\AnimationComponent.cs" />
+    <Compile Include="Game\Unit\Components\BodyComponent.cs" />
+    <Compile Include="Game\Unit\Components\VisionComponent.cs" />
+    <Compile Include="Game\Unit\Entities\DynamicBodyUnitEntity.cs" />
+    <Compile Include="Game\Unit\Entities\ChampionEntity.cs" />
+    <Compile Include="Game\Unit\Entities\UnitEntity.cs" />
+    <Compile Include="Game\Unit\Enum\UnitType.cs" />
+    <Compile Include="Game\Vision\VisionManagerEntity.cs" />
+    <Compile Include="Library\Collision2D\DynamicBody.cs" />
+    <Compile Include="Library\Collision2D\Body.cs" />
+    <Compile Include="Library\Collision2D\UniformGridWorld.cs" />
+    <Compile Include="Library\Config\ConfigReader.cs" />
+    <Compile Include="Library\ECS\Component.cs" />
+    <Compile Include="Library\ECS\Entity.cs" />
+    <Compile Include="Library\ECS\EntityIDGenerator.cs" />
+    <Compile Include="Library\ECS\EntityRef.cs" />
+    <Compile Include="Library\ECS\RootEntity.cs" />
+    <Compile Include="Library\Math2D\Circle.cs" />
+    <Compile Include="Library\Math2D\Edge.cs" />
+    <Compile Include="Library\Math2D\Math2DHelper.cs" />
+    <Compile Include="Library\Math2D\Poly.cs" />
+    <Compile Include="Library\Math2D\Shape.cs" />
+    <Compile Include="Library\Math2D\Vector2Int.cs" />
+    <Compile Include="Library\Network\Enum\MessageType.cs" />
+    <Compile Include="Library\Network\MsgPack\PlayerData.cs" />
+    <Compile Include="Library\Network\MsgPack\SnapshotData.cs" />
+    <Compile Include="Library\Network\MsgPack\Vector2Data.cs" />
+    <Compile Include="Library\Network\ServerNetwork.cs" />
+    <Compile Include="Library\Pathfinding\NavMeshPathfinder.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="enet.dylib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="libenet.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="map.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="map.snj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="enet.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ServerConfig.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\MessagePackAnalyzer.1.6.0\analyzers\dotnet\cs\MessagePackAnalyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

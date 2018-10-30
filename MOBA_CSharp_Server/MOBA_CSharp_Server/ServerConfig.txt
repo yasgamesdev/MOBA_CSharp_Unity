@@ -1,0 +1,5 @@
+Port=5000
+FrameRate=20
+Map=map.json
+NavMesh=map.snj
+VisionRadius=10.0
