@@ -27,6 +27,7 @@ namespace MOBA_CSharp_Server
                 if (stepTime <= frameMilliseconds)
                 {
                     Thread.Sleep(frameMilliseconds - stepTime);
+                    overTime = 0;
                 }
                 else
                 {
