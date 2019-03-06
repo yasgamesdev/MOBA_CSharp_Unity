@@ -1,0 +1,14 @@
+bool:
+  TestMode: false
+  IsScreenEdgeMovement: false
+float:
+  VisionRadius : 10.0
+  MapWidth: 100.0
+  MapHeight: 100.0
+int:
+  Port : 5000
+  ItemSlotNum : 6
+  FrameRate : 20
+string:
+  Host : localhost
+  

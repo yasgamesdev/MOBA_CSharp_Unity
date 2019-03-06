@@ -1,14 +1,14 @@
 ﻿using SharpNav;
+using SharpNav.Geometry;
 using SharpNav.IO.Json;
 using SharpNav.Pathfinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 using SVector3 = SharpNav.Geometry.Vector3;
 
-namespace Pathfinding
+namespace MOBA_CSharp_Server.Library.Pathfinding
 {
     public class NavMeshPathfinder
     {
@@ -21,7 +21,7 @@ namespace Pathfinding
             navMeshQuery = new NavMeshQuery(tiledNavMesh, 2048);
         }
 
-        public Vector2[] GetPath(Vector2 start, Vector2 end)
+        public Microsoft.Xna.Framework.Vector2[] GetPath(Microsoft.Xna.Framework.Vector2 start, Microsoft.Xna.Framework.Vector2 end)
         {
             NavPoint startPt = navMeshQuery.FindNearestPoly(new SVector3(-start.X, 0, start.Y), new SharpNav.Geometry.Vector3(2f, 2f, 2f));
             NavPoint endPt = navMeshQuery.FindNearestPoly(new SVector3(-end.X, 0, end.Y), new SharpNav.Geometry.Vector3(2f, 2f, 2f));
@@ -100,7 +100,7 @@ namespace Pathfinding
                 }
             }
 
-            return smoothPath.Select(x => new Vector2(-x.X, x.Z)).ToArray();
+            return smoothPath.Select(x => new Microsoft.Xna.Framework.Vector2 (-x.X, x.Z)).ToArray();
         }
 
         private bool GetSteerTarget(NavMeshQuery navMeshQuery, SVector3 startPos, SVector3 endPos, float minTargetDist, SharpNav.Pathfinding.Path path,

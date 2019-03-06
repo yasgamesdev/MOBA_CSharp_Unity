@@ -1,4 +1,5 @@
 ﻿#if !UNITY_WSA
+#if !NET_STANDARD_2_0
 
 using System;
 using System.Linq;
@@ -1678,6 +1679,23 @@ typeof(int), typeof(int) });
                 }
             }
 
+            EmittableMember[] members;
+            if (isIntKey)
+            {
+                members = intMembers.Values.OrderBy(x => x.IntKey).ToArray();
+            }
+            else
+            {
+                members = stringMembers.Values
+                    .OrderBy(x =>
+                    {
+                        var attr = x.GetDataMemberAttribute();
+                        if (attr == null) return int.MaxValue;
+                        return attr.Order;
+                    })
+                    .ToArray();
+            }
+
             return new ObjectSerializationInfo
             {
                 Type = type,
@@ -1685,7 +1703,7 @@ typeof(int), typeof(int) });
                 BestmatchConstructor = ctor,
                 ConstructorParameters = constructorParameters.ToArray(),
                 IsIntKey = isIntKey,
-                Members = (isIntKey) ? intMembers.Values.ToArray() : stringMembers.Values.ToArray(),
+                Members = members,
             };
         }
 
@@ -1749,6 +1767,18 @@ typeof(int), typeof(int) });
                 }
             }
 
+            public DataMemberAttribute GetDataMemberAttribute()
+            {
+                if (IsProperty)
+                {
+                    return (DataMemberAttribute)PropertyInfo.GetCustomAttribute<DataMemberAttribute>(true);
+                }
+                else
+                {
+                    return (DataMemberAttribute)FieldInfo.GetCustomAttribute<DataMemberAttribute>(true);
+                }
+            }
+
             public void EmitLoadValue(ILGenerator il)
             {
                 if (IsProperty)
@@ -1772,6 +1802,30 @@ typeof(int), typeof(int) });
                     il.Emit(OpCodes.Stfld, FieldInfo);
                 }
             }
+
+            //public object ReflectionLoadValue(object value)
+            //{
+            //    if (IsProperty)
+            //    {
+            //        return PropertyInfo.GetValue(value);
+            //    }
+            //    else
+            //    {
+            //        return FieldInfo.GetValue(value);
+            //    }
+            //}
+
+            //public void ReflectionStoreValue(object obj, object value)
+            //{
+            //    if (IsProperty)
+            //    {
+            //        PropertyInfo.SetValue(obj, value);
+            //    }
+            //    else
+            //    {
+            //        FieldInfo.SetValue(obj, value);
+            //    }
+            //}
         }
     }
 
@@ -1785,4 +1839,5 @@ typeof(int), typeof(int) });
     }
 }
 
+#endif
 #endif

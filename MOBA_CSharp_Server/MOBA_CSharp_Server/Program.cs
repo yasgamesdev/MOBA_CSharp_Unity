@@ -1,4 +1,5 @@
 ﻿using MOBA_CSharp_Server.Game;
+using System;
 using System.Diagnostics;
 using System.Threading;
 
@@ -8,9 +9,9 @@ namespace MOBA_CSharp_Server
     {
         static void Main(string[] args)
         {
-            GameEntity root = new GameEntity();
+            RootEntity root = new RootEntity();
 
-            int frameRate = root.GetChild<ConfigEntity>().GetInt("FrameRate");
+            int frameRate = root.GetChild<DataReaderEntity>().GetYAMLObject(@"YAML\ServerConfig.yml").GetData<int>("FrameRate");
             int frameMilliseconds = 1000 / frameRate;
 
             Stopwatch stopwatch = new Stopwatch();

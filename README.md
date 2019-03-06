@@ -1,29 +1,41 @@
 # MOBA_CSharp_Unity
-Framework for MOBA games. The server does not depend on Unity. Run on Linux.
+Framework for MOBA games. The server doesn't depend on Unity. Run programs on Linux.
+[![Doujin Allstars Release Trailer: Open-source MOBA](https://img.youtube.com/vi/-eD6KAgt7co/0.jpg)](https://www.youtube.com/watch?v=-eD6KAgt7co)
 ## Features
-- Client and Server written C#.
-- Framework does not depend on Unity.
-- The server is just a console application. So run on Linux with Mono.
-- First collision detection using Uniform Grid.
+- Client and Server written in C#.
+- The code is only 3000 lines.
+- Framework doesn't depend on Unity.
+- The server is just a console application. So run programs on Linux with Mono.
 - Pathfinding using Navigation Mesh.
-- Sight shared by team.
-- Fog of War.
+- Sight is shared by team.
+- Bush
+- Scriptable Heroes & Skills & Buffs & Items.
 ## Quick Setup
 ### Client
 1. Open `MOBA_CSharp_Unity_Client` with Unity.
 2. Build
-3. Copy `MOBA_CSharp_Unity_Client/ClientConfig.txt` and `MOBA_CSharp_Unity_Client/map.json` to build folder.
-4. Open `ClientConfig.txt`. And modify `Host` and `Port`.
+3. Copy `MOBA_CSharp_Unity_Client/YAML` and `MOBA_CSharp_Unity_Client/CSV` to build folder.
+4. Open `YAML/ClientConfig.yml`. And modify `Host` and `Port`.
 ### Server
 1. Open `MOBA_CSharp_Server/MOBA_CSharp_Server.sln` with Visual Studio or MonoDevelop.
 2. Build
-3. Open `ServerConfig.txt` in the build folder. And modify `Port`.
-## Software
+3. Open `YAML/ServerConfig.yml` in the build folder. And modify `Port`.
+## References
+### Games
+- Inspired By [League of Legends](https://na.leagueoflegends.com/)
+- Inspired By [Heroes of the Storm](https://heroesofthestorm.com/)
+### Software
 - Language: C#
 - UDP: [ENet-CSharp](https://github.com/nxrighthere/ENet-CSharp)
 - Serialization: [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)
-- Geometry: [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite)
-- Collision: own program
+- Physics: [VelcroPhysics](https://github.com/VelcroPhysics/VelcroPhysics)
 - Pathfinding: [SharpNav](https://github.com/Robmaister/SharpNav)
-- Fog of War: [Fog-of-war](https://github.com/LeLocTai/Fog-of-war)
-- Client Game Engine: [Unity](https://unity3d.com)
+- CSV: [CsvHelper](https://joshclose.github.io/CsvHelper/)
+- Json: [Json.NET](https://www.newtonsoft.com/json)
+- YAML: [YamlDotNet](https://github.com/aaubry/YamlDotNet)
+- Client Game Engine: [Unity 2018.3.4f1](https://unity3d.com)
+## Q&A
+### How can I change the parameters of the unit?
+Open `MOBA_CSharp_Server\MOBA_CSharp_Server\CSV\ExpTables` and modify CSV files.
+### How can I change the parameters of the item?
+Open `MOBA_CSharp_Server\MOBA_CSharp_Server\CSV\Items.csv` and modify it.

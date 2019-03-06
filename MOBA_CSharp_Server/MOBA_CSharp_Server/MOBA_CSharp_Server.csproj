@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A85AB64B-E8DD-4078-B79F-7F4B3391FA6B}</ProjectGuid>
+    <ProjectGuid>{62FAE07C-BA2B-4480-BE85-944571D6515A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MOBA_CSharp_Server</RootNamespace>
     <AssemblyName>MOBA_CSharp_Server</AssemblyName>
@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -33,33 +34,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ENet-CSharp">
-      <HintPath>Library\Network\ENet-CSharp.dll</HintPath>
+    <Reference Include="CsvHelper, Version=12.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.12.1.2\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
-    <Reference Include="GeoAPI">
-      <HintPath>Library\Math2D\GeoAPI.dll</HintPath>
+    <Reference Include="ENet-CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ENet-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="MessagePack, Version=1.7.3.4, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
       <HintPath>..\packages\MessagePack.1.7.3.4\lib\net45\MessagePack.dll</HintPath>
     </Reference>
-    <Reference Include="NetTopologySuite">
-      <HintPath>Library\Math2D\NetTopologySuite.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\Pathfinding\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpNav">
-      <HintPath>Library\Pathfinding\SharpNav.dll</HintPath>
+    <Reference Include="SharpNav, Version=1.0.0.1, Culture=neutral, PublicKeyToken=b467138d8cacd85b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\SharpNav.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,84 +67,333 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet">
-      <HintPath>Library\Pathfinding\YamlDotNet.dll</HintPath>
+    <Reference Include="VelcroPhysics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\VelcroPhysics.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.5.3.0\lib\net45\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Client\ClientManagerEntity.cs" />
-    <Compile Include="Game\Collision\CollisionEntity.cs" />
-    <Compile Include="Game\Config\ConfigEntity.cs" />
+    <Compile Include="Game\Enum\CombatAttribute.cs" />
+    <Compile Include="Game\Enum\CastType.cs" />
+    <Compile Include="Game\Enum\CombatType.cs" />
+    <Compile Include="Game\Enum\Priorities\AnimationStatusPriority.cs" />
+    <Compile Include="Game\Enum\Priorities\VisionStatusPriority.cs" />
+    <Compile Include="Game\Enum\Priorities\BoolStatusPriority.cs" />
+    <Compile Include="Game\Enum\BoolStatus.cs" />
+    <Compile Include="Game\Enum\FloatStatus.cs" />
     <Compile Include="Game\Enum\AnimationType.cs" />
+    <Compile Include="Game\Enum\UnitType.cs" />
     <Compile Include="Game\Enum\Team.cs" />
-    <Compile Include="Game\Factory\FactoryEntity.cs" />
-    <Compile Include="Game\Json\CircleJson.cs" />
-    <Compile Include="Game\Json\EdgeJson.cs" />
-    <Compile Include="Game\Json\MapJson.cs" />
-    <Compile Include="Game\Json\PolyJson.cs" />
+    <Compile Include="Game\Json\BushInfo.cs" />
+    <Compile Include="Game\Json\CircleInfo.cs" />
+    <Compile Include="Game\Json\CoreInfo.cs" />
+    <Compile Include="Game\Json\EdgeInfo.cs" />
+    <Compile Include="Game\Json\MapInfo.cs" />
+    <Compile Include="Game\Json\MinionRelayPointInfo.cs" />
+    <Compile Include="Game\Json\MonsterInfo.cs" />
+    <Compile Include="Game\Json\SpawnInfo.cs" />
+    <Compile Include="Game\Json\TowerInfo.cs" />
+    <Compile Include="Game\MsgPack\MsgObj.cs" />
+    <Compile Include="Game\MsgPack\LobbyObj.cs" />
+    <Compile Include="Game\MsgPack\SelectObj.cs" />
+    <Compile Include="Game\MsgPack\CastObj.cs" />
+    <Compile Include="Game\MsgPack\ChangeObj.cs" />
+    <Compile Include="Game\MsgPack\CombatObj.cs" />
+    <Compile Include="Game\MsgPack\IGetAnimInfo.cs" />
+    <Compile Include="Game\MsgPack\PlayerObj.cs" />
+    <Compile Include="Game\MsgPack\UnitObj.cs" />
+    <Compile Include="Game\MsgPack\ActorObj.cs" />
+    <Compile Include="Game\MsgPack\BuildingObj.cs" />
+    <Compile Include="Game\MsgPack\IGetUnitInfo.cs" />
+    <Compile Include="Game\MsgPack\SnapshotObj.cs" />
+    <Compile Include="Game\MsgPack\ClientObj.cs" />
+    <Compile Include="Game\MsgPack\ChampionObj.cs" />
+    <Compile Include="Game\MsgPack\Vector3Obj.cs" />
+    <Compile Include="Game\MsgPack\Vector2Obj.cs" />
+    <Compile Include="Game\Network\GameClient.cs" />
     <Compile Include="Game\Network\NetworkEntity.cs" />
     <Compile Include="Game\Pathfinding\PathfindingEntity.cs" />
-    <Compile Include="Game\Root\GameEntity.cs" />
-    <Compile Include="Game\UnitManager\UnitManagerEntity.cs" />
-    <Compile Include="Game\Unit\Components\AnimationComponent.cs" />
-    <Compile Include="Game\Unit\Components\BodyComponent.cs" />
-    <Compile Include="Game\Unit\Components\VisionComponent.cs" />
-    <Compile Include="Game\Unit\Entities\DynamicBodyUnitEntity.cs" />
-    <Compile Include="Game\Unit\Entities\ChampionEntity.cs" />
-    <Compile Include="Game\Unit\Entities\UnitEntity.cs" />
-    <Compile Include="Game\Unit\Enum\UnitType.cs" />
-    <Compile Include="Game\Vision\VisionManagerEntity.cs" />
-    <Compile Include="Library\Collision2D\DynamicBody.cs" />
-    <Compile Include="Library\Collision2D\Body.cs" />
-    <Compile Include="Library\Collision2D\UniformGridWorld.cs" />
-    <Compile Include="Library\Config\ConfigReader.cs" />
-    <Compile Include="Library\ECS\Component.cs" />
+    <Compile Include="Game\Physics\PhysicsEntity.cs" />
+    <Compile Include="Game\DataReader\DataReaderEntity.cs" />
+    <Compile Include="Game\RootEntity.cs" />
+    <Compile Include="Game\CSVReader\CSVReader.cs" />
+    <Compile Include="Game\CSVReader\CSVReaderEntity.cs" />
+    <Compile Include="Game\CSVReader\ItemTable.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\Skill.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\ImmediateCircle.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\ImmediateCone.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\Attack.cs" />
+    <Compile Include="Game\UnitComponent\Combat\AnimParam.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\Poison.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\Slow.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\Stun.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\Untargetable.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Items\SpecialBoot.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Items\SpecialShield.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Items\Katana.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Items\RegenPierce.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Items\RegenArmor.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Items\Potion.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Items\Item.cs" />
+    <Compile Include="Game\UnitComponent\Combat\VisionParam.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Combat.cs" />
+    <Compile Include="Game\UnitComponent\Combat\BoolParam.cs" />
+    <Compile Include="Game\UnitComponent\Combat\FloatParam.cs" />
+    <Compile Include="Game\Unit\Actors\EarthShatter.cs" />
+    <Compile Include="Game\Unit\Actors\PoisonGas.cs" />
+    <Compile Include="Game\Unit\Actors\BigBang.cs" />
+    <Compile Include="Game\Unit\Actors\Cone.cs" />
+    <Compile Include="Game\Unit\Actors\AreaOfEffect.cs" />
+    <Compile Include="Game\Unit\Actors\Bullet.cs" />
+    <Compile Include="Game\Unit\Actors\TowerBullet.cs" />
+    <Compile Include="Game\Unit\Actors\Actor.cs" />
+    <Compile Include="Game\Unit\Buildings\Fountain.cs" />
+    <Compile Include="Game\Unit\Buildings\Tower.cs" />
+    <Compile Include="Game\Unit\Buildings\Core.cs" />
+    <Compile Include="Game\Unit\Buildings\Building.cs" />
+    <Compile Include="Game\Unit\Characters\Champions\Champion.cs" />
+    <Compile Include="Game\Unit\Characters\Monster.cs" />
+    <Compile Include="Game\Unit\Characters\Minion.cs" />
+    <Compile Include="Game\Unit\Characters\Character.cs" />
+    <Compile Include="Game\Unit\SkillFactory.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\ImmediateDirection.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\Recall.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\Move.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Abilities\Ability.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Status.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\OnBase.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\Eye.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\Sight.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\Effect.cs" />
+    <Compile Include="Game\Unit\DamageHistory.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\UnitStatus.cs" />
+    <Compile Include="Game\UnitComponent\Combat\Effects\ExpTable.cs" />
+    <Compile Include="Game\UnitComponent\Transform.cs" />
+    <Compile Include="Game\UnitComponent\UnitComponent.cs" />
+    <Compile Include="Game\Unit\Unit.cs" />
+    <Compile Include="Game\Unit\ItemFactory.cs" />
+    <Compile Include="Game\Unit\Utilities.cs" />
+    <Compile Include="Game\Unit\UnitFactory.cs" />
+    <Compile Include="Game\World\WorldEntity.cs" />
+    <Compile Include="Library\DataReader\YAMLObject.cs" />
+    <Compile Include="Library\DataReader\YAMLReader.cs" />
     <Compile Include="Library\ECS\Entity.cs" />
-    <Compile Include="Library\ECS\EntityIDGenerator.cs" />
-    <Compile Include="Library\ECS\EntityRef.cs" />
-    <Compile Include="Library\ECS\RootEntity.cs" />
-    <Compile Include="Library\Math2D\Circle.cs" />
-    <Compile Include="Library\Math2D\Edge.cs" />
-    <Compile Include="Library\Math2D\Math2DHelper.cs" />
-    <Compile Include="Library\Math2D\Poly.cs" />
-    <Compile Include="Library\Math2D\Shape.cs" />
-    <Compile Include="Library\Math2D\Vector2Int.cs" />
-    <Compile Include="Library\Network\Enum\MessageType.cs" />
-    <Compile Include="Library\Network\MsgPack\PlayerData.cs" />
-    <Compile Include="Library\Network\MsgPack\SnapshotData.cs" />
-    <Compile Include="Library\Network\MsgPack\Vector2Data.cs" />
+    <Compile Include="Library\Network\MessageType.cs" />
     <Compile Include="Library\Network\ServerNetwork.cs" />
     <Compile Include="Library\Pathfinding\NavMeshPathfinder.cs" />
+    <Compile Include="Library\Physics\BodyWrapper.cs" />
+    <Compile Include="Library\Physics\NoCollisionBody.cs" />
+    <Compile Include="Library\Physics\VPhysics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CSV\ExpTables\BigBang.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Fountain.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Core.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Default.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\FireBall.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\FireBreath.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\HakureiReimu.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\KizunaAI.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Serval.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\HatsuneMiku.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Meteor.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Minion.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\UltraMonster.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\SuperMonster.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Monster.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Tower.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\TowerBullet.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\ExpTables\Yukikaze.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CSV\Items.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="enet.dylib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="libenet.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="map.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Map\map.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="map.snj">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Map\map.snj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="YAML\Combats\BigBang.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\EarthShatter.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\PressurisedSteam.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\PoisonGas.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Slow.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Poison.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Stun.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\SpecialBoot.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\SpecialShield.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Katana.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\RegenPierce.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\RegenArmor.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Potion.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Default.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Move.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Eye.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\FireBall.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\OnBase.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Attack.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Recall.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Sight.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Untargetable.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Monster.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Minion.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\FireBreath.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Meteor.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Fountain.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Default.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\HakureiReimu.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Core.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\TowerBullet.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Tower.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\HatsuneMiku.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\KizunaAI.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Serval.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\Yukikaze.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\UnitStatus.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\ServerConfig.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Units\FireBall.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\FireBreath.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YAML\Combats\Meteor.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="ENet-CSharp.dll" />
     <Content Include="enet.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ServerConfig.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\MessagePackAnalyzer.1.6.0\analyzers\dotnet\cs\MessagePackAnalyzer.dll" />
+    <Content Include="SharpNav.dll" />
+    <Content Include="VelcroPhysics.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

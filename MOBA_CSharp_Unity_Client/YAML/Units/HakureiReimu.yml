@@ -1,0 +1,10 @@
+bool:
+float:
+  VisionRadius: 10.0
+int:
+string:
+  Name: HakureiReimu
+  QSkill : EarthShatter
+  WSkill : PoisonGas
+  ESkill : PressurisedSteam
+  

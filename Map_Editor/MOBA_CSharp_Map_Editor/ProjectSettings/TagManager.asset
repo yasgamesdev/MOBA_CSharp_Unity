@@ -7,7 +7,12 @@ TagManager:
   - Edge
   - Circle
   - Rect
-  - Poly
+  - Spawn
+  - Core
+  - Tower
+  - Monster
+  - MinionRelayPoint
+  - Bush
   layers:
   - Default
   - TransparentFX
@@ -18,9 +23,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - Vision
-  - Obstacle
-  - Enemy
+  - 
+  - 
+  - 
   - 
   - 
   - 

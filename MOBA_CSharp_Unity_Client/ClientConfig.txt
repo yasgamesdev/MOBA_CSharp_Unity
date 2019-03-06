@@ -1,5 +1,0 @@
-Host=localhost
-Port=5000
-FrameRate=20
-Map=map.json
-VisionRadius=10.0

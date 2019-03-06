@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ENet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ENet;
 
-namespace Network
+namespace MOBA_CSharp_Server.Library.Network
 {
     public delegate void MessageHandler(Peer peer, byte[] data);
 
@@ -36,7 +36,7 @@ namespace Network
 
         public void Listen(ushort port, int peerLimit)
         {
-            Library.Initialize();
+            ENet.Library.Initialize();
 
             server = new Host();
 
@@ -51,7 +51,7 @@ namespace Network
             if (server != null)
             {
                 server.Flush();
-                Library.Deinitialize();
+                ENet.Library.Deinitialize();
             }
         }
 
@@ -91,7 +91,7 @@ namespace Network
 
         void Invoke(MessageType type, Peer peer, byte[] data)
         {
-            if(handlers[(int)type] != null)
+            if (handlers[(int)type] != null)
             {
                 handlers[(int)type](peer, data);
             }

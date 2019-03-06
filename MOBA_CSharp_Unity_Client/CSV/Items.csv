@@ -1,0 +1,38 @@
+Type,ItemName,BuyingPrice,SellingPrice,Description,AddMaxHP,MulMaxHP,AddMaxMP,MulMaxMP,AddAttack,MulAttack,AddDefence,MulDefence,AddMagicAttack,MulMagicAttack,AddMagicDefence,MulMagicDefence,AddAttackRange,MulAttackRange,AddAttackRate,MulAttackRate,AddMovementSpeed,MulMovementSpeed
+Potion,Potion,30,15,HP+100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Armor,Armor,100,50,MaxHP+50,50,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+RareArmor,Rare Armor,400,200,MaxHP+200,200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+EpicArmor,Epic Armor,1600,800,MaxHP+800,800,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+RegenArmor,Regen Armor,800,400,HP+1%/sec,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pierce,Pierce,100,50,MaxMP+10,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+RarePierce,Rare Pierce,400,200,MaxMP+40,0,0,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+EpicPierce,Epic Pierce,1600,800,MaxMP+160,0,0,160,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+RegenPierce,Regen Pierce,800,400,MP+1%/sec,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sword,Sword,100,50,Attack+10,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+RareSword,Rare Sword,400,200,Attack+40,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,0,0
+EpicSword,Epic Sword,1600,800,Attack+160,0,0,0,0,160,0,0,0,0,0,0,0,0,0,0,0,0,0
+Katana,Katana,800,400,Attack+(MaxHP/HP)x20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shield,Shield,100,50,Defence+10,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0
+RareShield,Rare Shield,400,200,Defence+40,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0
+EpicShield,Epic Shield,1600,800,Defence+160,0,0,0,0,0,0,160,0,0,0,0,0,0,0,0,0,0,0
+SpecialShield,Special Shield,800,400,HP+50%(Cooldown 5min),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Wand,Wand,100,50,MagicAttack+10,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0
+RareWand,Rare Wand,400,200,MagicAttack+40,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0
+EpicWand,Epic Wand,1600,800,MagicAttack+160,0,0,0,0,0,0,0,0,160,0,0,0,0,0,0,0,0,0
+SpecialWand,Special Wand,800,400,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Cloak,Cloak,100,50,MagicDefence+10,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0
+RareCloak,Rare Cloak,400,200,MagicDefence+40,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0
+EpicCloak,Epic Cloak,1600,800,MagicDefence+160,0,0,0,0,0,0,0,0,0,0,160,0,0,0,0,0,0,0
+SpecialCloak,Special Cloak,800,400,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ring,Ring,100,50,AttackRange+10%,0,0,0,0,0,0,0,0,0,0,0,0,0,0.1,0,0,0,0
+RareRing,Rare Ring,400,200,AttackRange+20%,0,0,0,0,0,0,0,0,0,0,0,0,0,0.2,0,0,0,0
+EpicRing,Epic Ring,1600,800,AttackRange+40%,0,0,0,0,0,0,0,0,0,0,0,0,0,0.4,0,0,0,0
+SpecialRing,Special Ring,800,400,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Amulet,Amulet,100,50,AttackRate+10%,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.1,0,0
+RareAmulet,Rare Amulet,400,200,AttackRate+20%,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.2,0,0
+EpicAmulet,Epic Amulet,1600,800,AttackRate+40%,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.4,0,0
+SpecialAmulet,Special Amulet,800,400,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Boot,Boot,100,50,MovementSpeed+10%,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.1
+RareBoot,Rare Boot,400,200,MovementSpeed+20%,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.2
+EpicBoot,Epic Boot,1600,800,MovementSpeed+40%,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.4
+SpecialBoot,Special Boot,800,400,"MovementSpeed+200%(Duration 3sec, Cooldown 3min)",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOBA_CSharp_Server", "MOBA_CSharp_Server\MOBA_CSharp_Server.csproj", "{A85AB64B-E8DD-4078-B79F-7F4B3391FA6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOBA_CSharp_Server", "MOBA_CSharp_Server\MOBA_CSharp_Server.csproj", "{62FAE07C-BA2B-4480-BE85-944571D6515A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A85AB64B-E8DD-4078-B79F-7F4B3391FA6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A85AB64B-E8DD-4078-B79F-7F4B3391FA6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A85AB64B-E8DD-4078-B79F-7F4B3391FA6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A85AB64B-E8DD-4078-B79F-7F4B3391FA6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62FAE07C-BA2B-4480-BE85-944571D6515A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FAE07C-BA2B-4480-BE85-944571D6515A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FAE07C-BA2B-4480-BE85-944571D6515A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FAE07C-BA2B-4480-BE85-944571D6515A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B8CB8767-2A69-4554-82EB-4CB2FBAE8846}
+		SolutionGuid = {CCFAC195-42AD-43DB-AA2D-FFCC74C84BAF}
 	EndGlobalSection
 EndGlobal

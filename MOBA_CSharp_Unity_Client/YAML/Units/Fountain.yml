@@ -1,0 +1,7 @@
+bool:
+float:
+  VisionRadius: 10.0
+  RegainRate: 0.1
+int:
+string:
+  

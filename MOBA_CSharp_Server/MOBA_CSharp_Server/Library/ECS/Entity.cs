@@ -1,106 +1,143 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ECS
+namespace MOBA_CSharp_Server.Library.ECS
 {
-    public abstract class Entity
+    public class Entity
     {
-        public int EntityID { get; private set; }
-        public bool Destroyed { get; private set; }
+        public List<Type> InheritedTypes { get; private set; } = new List<Type>();
+        public Entity Root { get; private set; }
+        public bool Destroyed { get; set; }
 
-        protected RootEntity root { get; private set; }
-        Dictionary<Type, Dictionary<int, Entity>> children = new Dictionary<Type, Dictionary<int, Entity>>();
-        Dictionary<Type, Component> components = new Dictionary<Type, Component>();
+        //children
+        protected Dictionary<Type, List<Entity>> children = new Dictionary<Type, List<Entity>>();
+        protected bool isDuringStep;
+        protected List<Entity> addEntities = new List<Entity>();
+        protected List<Entity> removeEntities = new List<Entity>();
 
-        public Entity() : base()
+        public Entity(Entity root)
         {
+            AddInheritedType(typeof(Entity));
+
+            Root = root;
             Destroyed = false;
+
+            isDuringStep = false;
         }
 
-        public Entity(RootEntity root) : base()
+        protected void AddInheritedType(Type type)
         {
-            EntityID = root.GenerateEntityID();
-            Destroyed = false;
-            SetRoot(root);
+            InheritedTypes.Add(type);
         }
 
-        public virtual void Destroy()
+        public void Destroy()
         {
-            Destroyed = true;
-
-            foreach (var dict in children.Values)
+            List<Entity> tempRemoveEntities = new List<Entity>();
+            foreach (Entity entity in GetChildren<Entity>())
             {
-                foreach(var entity in dict.Values)
+                entity.Destroy();
+
+                if (entity.Destroyed)
                 {
-                    entity.Destroy();
+                    entity.ClearReference();
+                    tempRemoveEntities.Add(entity);
+                }
+            }
+            tempRemoveEntities.ForEach(x => RemoveChild(x));
+        }
+
+        public virtual void ClearReference()
+        {
+            foreach (Entity entity in GetChildren<Entity>())
+            {
+                entity.ClearReference();
+            }
+        }
+
+        public virtual void AddChild(Entity entity)
+        {
+            if(isDuringStep)
+            {
+                addEntities.Add(entity);
+            }
+            else
+            {
+                foreach (Type type in entity.InheritedTypes)
+                {
+                    if (!children.ContainsKey(type))
+                    {
+                        children.Add(type, new List<Entity>());
+                    }
+                    children[type].Add(entity);
                 }
             }
         }
 
-        public void SetEntityID(int entityID)
+        public virtual void RemoveChild(Entity entity)
         {
-            EntityID = entityID;
-        }
-
-        protected void SetRoot(RootEntity root)
-        {
-            this.root = root;
-        }
-
-        public void AddChild(Entity entity)
-        {
-            if (!children.ContainsKey(entity.GetType()))
+            if(isDuringStep)
             {
-                children.Add(entity.GetType(), new Dictionary<int, Entity>());
+                removeEntities.Add(entity);
             }
-            children[entity.GetType()].Add(entity.EntityID, entity);
-        }
-
-        public void RemoveChild(Entity entity)
-        {
-            children[entity.GetType()].Remove(entity.EntityID);
-        }
-
-        public void AddComponent(Component component)
-        {
-            components.Add(component.GetType(), component);
+            else
+            {
+                foreach (Type type in entity.InheritedTypes)
+                {
+                    children[type].Remove(entity);
+                    if (children[type].Count == 0)
+                    {
+                        children.Remove(type);
+                    }
+                }
+            }
         }
 
         public virtual void Step(float deltaTime)
         {
-            foreach(var keyValue in components)
+            isDuringStep = true;
+
+            foreach(Entity entity in GetChildren<Entity>())
             {
-                keyValue.Value.Step(deltaTime);
+                entity.Step(deltaTime);
             }
 
-            foreach(var keyValue in children)
+            isDuringStep = false;
+
+            foreach(Entity addEntity in addEntities)
             {
-                foreach(var kv in keyValue.Value)
-                {
-                    kv.Value.Step(deltaTime);
-                }
+                AddChild(addEntity);
             }
+            addEntities.Clear();
+            foreach(Entity removeEntity in removeEntities)
+            {
+                RemoveChild(removeEntity);
+            }
+            removeEntities.Clear();
         }
 
         public T GetChild<T>() where T : Entity
         {
-            return (T)children[typeof(T)].First().Value;
+            if(children.ContainsKey(typeof(T)))
+            {
+                return (T)children[typeof(T)].First();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public T[] GetChildren<T>() where T : Entity
         {
             if (!children.ContainsKey(typeof(T)))
             {
-                children.Add(typeof(T), new Dictionary<int, Entity>());
+                return new T[0];
             }
 
-            return children[typeof(T)].Values.Cast<T>().ToArray();
-        }
-
-        public T GetComponent<T>() where T : Component
-        {
-            return (T)components[typeof(T)];
+            return children[typeof(T)].Cast<T>().ToArray();
         }
     }
 }

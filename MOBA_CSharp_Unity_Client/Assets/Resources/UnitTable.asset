@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329a20e3b3ca31a48b4568b35b286bdf, type: 3}
+  m_Name: UnitTable
+  m_EditorClassIdentifier: 
+  table:
+  - Type: 1
+    Model: {fileID: 8894229128359151647, guid: 1e6d1018bcd386341bbcbce18f9a677a, type: 3}
+    Icon: {fileID: 0}
+  - Type: 2
+    Model: {fileID: 7239647570183418329, guid: 7e2174d4aded1a34abe4d1d42feecc71, type: 3}
+    Icon: {fileID: 0}
+  - Type: 3
+    Model: {fileID: 1057408660932521746, guid: 1efd53f0b9eb0114eb7c74a5e761da5a, type: 3}
+    Icon: {fileID: 0}
+  - Type: 4
+    Model: {fileID: 4395087637121807677, guid: 1b486092d19aa784bad7fcf60c24929e, type: 3}
+    Icon: {fileID: 0}
+  - Type: 5
+    Model: {fileID: 7791875701267041248, guid: d2deee45dd5eda3428ecc70188eb218f, type: 3}
+    Icon: {fileID: 0}
+  - Type: 6
+    Model: {fileID: 7509714852712105795, guid: f1309c005290dd54ab92eb4b4e5b90b4, type: 3}
+    Icon: {fileID: 0}
+  - Type: 7
+    Model: {fileID: 6178626840965237853, guid: e11cd4539fc9f254d9bd265abb186bcc, type: 3}
+    Icon: {fileID: 0}
+  - Type: 8
+    Model: {fileID: 3083282695149917362, guid: 2c4b56404d31c2b4db27117bb22c8771, type: 3}
+    Icon: {fileID: 0}
+  - Type: 9
+    Model: {fileID: 3685765008996083657, guid: 2c217f5793d7c154f9d49d68d095f89f, type: 3}
+    Icon: {fileID: 0}
+  - Type: 10
+    Model: {fileID: 2417342249048320688, guid: 2edde18c2f86e40439f907933f53386d, type: 3}
+    Icon: {fileID: 0}
+  - Type: 11
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 0}
+  - Type: 12
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 0}
+  - Type: 13
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 0}
+  - Type: 14
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 0}
+  - Type: 15
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 21300000, guid: 38e21d83e5d98bb4d80f1669bfb338ba, type: 3}
+  - Type: 16
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 21300000, guid: 38e21d83e5d98bb4d80f1669bfb338ba, type: 3}
+  - Type: 17
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 21300000, guid: 38e21d83e5d98bb4d80f1669bfb338ba, type: 3}
+  - Type: 18
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 21300000, guid: 38e21d83e5d98bb4d80f1669bfb338ba, type: 3}
+  - Type: 19
+    Model: {fileID: 942409411578096780, guid: 366fa6169b895ba49a5795ba3f680d1c, type: 3}
+    Icon: {fileID: 21300000, guid: 38e21d83e5d98bb4d80f1669bfb338ba, type: 3}

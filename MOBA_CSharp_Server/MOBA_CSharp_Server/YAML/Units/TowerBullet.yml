@@ -1,0 +1,6 @@
+bool:
+float:
+  TargetHeight : 0.8
+  Speed : 10
+int:
+string:

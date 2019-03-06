@@ -1,0 +1,13 @@
+bool:
+  StackDisplayCount: true
+  ExecuteConsumeCount: false
+  IsSendDataToClient: true
+float:
+  Cooldown: 0.0
+  Cost: 0.0
+  Duration: 1.0
+int:
+  Charge: 0
+  MaxCharge: 0
+  Count: 1
+string:

@@ -9,7 +9,7 @@ namespace MOBA_CSharp_Client.ClientNetwork
 {
     public delegate void MessageHandler(byte[] data);
 
-    class ClientNetwork
+    public class ClientNetwork
     {
         MessageHandler[] handlers;
 
@@ -62,6 +62,11 @@ namespace MOBA_CSharp_Client.ClientNetwork
 
         public void Service()
         {
+            if(client == null)
+            {
+                return;
+            }
+
             Event netEvent;
             while (client.Service(0, out netEvent) > 0)
             {

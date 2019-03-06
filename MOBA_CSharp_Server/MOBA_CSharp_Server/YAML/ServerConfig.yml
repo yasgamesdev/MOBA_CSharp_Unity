@@ -1,0 +1,15 @@
+bool:
+  TestMode: false
+float:
+  VictoryTime: 10.0
+  VisionRadius : 10.0
+  InitGold : 100.0
+  ChampionRespawnTime: 5.0
+int:
+  Port : 5000
+  FrameRate : 20
+  ItemSlotNum : 6
+string:
+  Map : Map\map.json
+  NavMesh : Map\map.snj
+  

@@ -1,0 +1,15 @@
+bool:
+  StackDisplayCount: false
+  ExecuteConsumeCount: false
+float:
+  Cooldown: 3.0
+  Cost: 10.0
+  Radius : 2.0
+  Duration : 3.0
+  Distance : 5.0
+int:
+  Charge: 1
+  MaxCharge: 1
+  Count: 0
+string:
+  CastType: ImmediateCircle

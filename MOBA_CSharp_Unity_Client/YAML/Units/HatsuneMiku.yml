@@ -1,0 +1,10 @@
+bool:
+float:
+  VisionRadius: 10.0
+int:
+string:
+  Name: HatsuneMiku
+  QSkill : FireBall
+  WSkill : FireBreath
+  ESkill : Meteor
+  RSkill : BigBang

@@ -1,0 +1,27 @@
+﻿public enum UnitType
+{
+    //Building
+    Fountain,
+    Core,
+    Tower,
+    //Actor
+    TowerBullet,
+    FireBall,
+    FireBreath,
+    Meteor,
+    BigBang,
+    EarthShatter,
+    PoisonGas,
+    PressurisedSteam,
+    //Character
+    Minion,
+    Monster,
+    SuperMonster,
+    UltraMonster,
+    //Character.Champion
+    HatsuneMiku,
+    HakureiReimu,
+    Yukikaze,
+    Serval,
+    KizunaAI,
+}

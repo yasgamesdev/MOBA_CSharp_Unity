@@ -1,0 +1,8 @@
+bool:
+float:
+  VisionRadius: 10.0
+  AttackRadius: 5.0
+  DestroyTime: 3.0
+int:
+string:
+  

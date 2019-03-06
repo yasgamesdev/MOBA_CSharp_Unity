@@ -1,9 +1,6 @@
-﻿namespace MOBA_CSharp_Server.Game
+﻿public enum Team
 {
-    public enum Team
-    {
-        Yellow,
-        Blue,
-        Red
-    }
+    Yellow,
+    Blue,
+    Red
 }

@@ -1,21 +1,20 @@
-﻿using ECS;
-using Pathfinding;
-using System.Numerics;
+﻿using Microsoft.Xna.Framework;
+using MOBA_CSharp_Server.Library.ECS;
+using MOBA_CSharp_Server.Library.Pathfinding;
 
 namespace MOBA_CSharp_Server.Game
 {
     public class PathfindingEntity : Entity
     {
-        NavMeshPathfinder pathfinder;
+        NavMeshPathfinder pathfinder = new NavMeshPathfinder();
 
-        public PathfindingEntity(RootEntity root) : base(root)
+        public PathfindingEntity(Entity root) : base(root)
         {
-
+            AddInheritedType(typeof(PathfindingEntity));
         }
 
         public void Load(string path)
         {
-            pathfinder = new NavMeshPathfinder();
             pathfinder.Load(path);
         }
 

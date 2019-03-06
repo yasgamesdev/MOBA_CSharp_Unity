@@ -1,0 +1,8 @@
+bool:
+float:
+  VisionRadius: 10.0
+  RespawnTime: 10.0
+  SpawnRadius: 2.0
+int:
+string:
+  

@@ -1,0 +1,6 @@
+bool:
+float:
+  VisionRadius: 10.0
+int:
+string:
+  Name: DefaultName

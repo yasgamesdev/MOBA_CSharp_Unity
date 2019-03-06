@@ -1,0 +1,11 @@
+bool:
+  StackDisplayCount: false
+  ExecuteConsumeCount: false
+float:
+  Cooldown: 0.0
+  Cost: 0.0
+int:
+  Charge: 0
+  MaxCharge: 0
+  Count: 0
+string:

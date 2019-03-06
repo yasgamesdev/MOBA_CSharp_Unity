@@ -1,6 +1,12 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using SharpNav;
+using SharpNav.CLI;
+using SharpNav.IO;
+using SharpNav.IO.Json;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -33,38 +39,185 @@ public class ExportScene : EditorWindow
     private static int counter = 0;
     private static int progressUpdateInterval = 10000;
 
-    [MenuItem("ExportScene/ExportSceneToObj")]
-    [MenuItem("GameObject/ExportScene/ExportSceneToObj")]
-    public static void Export()
+    //[MenuItem("ExportScene/ExportSceneToObj")]
+    //[MenuItem("GameObject/ExportScene/ExportSceneToObj")]
+    //public static void Export()
+    //{
+    //    ExportSceneToObj(false);
+    //}
+
+    //[MenuItem("ExportScene/ExportSceneToObj(AutoCut)")]
+    //[MenuItem("GameObject/ExportScene/ExportSceneToObj(AutoCut)")]
+    //public static void ExportAutoCut()
+    //{
+    //    ExportSceneToObj(true);
+    //}
+
+    //[MenuItem("ExportScene/ExportSelectedObj")]
+    //[MenuItem("GameObject/ExportScene/ExportSelectedObj", priority = 44)]
+    //public static void ExportObj()
+    //{
+    //    GameObject selectObj = Selection.activeGameObject;
+    //    if (selectObj == null)
+    //    {
+    //        Debug.LogWarning("Select a GameObject");
+    //        return;
+    //    }
+    //    string path = GetSavePath(false, selectObj);
+    //    if (string.IsNullOrEmpty(path)) return;
+
+    //    Terrain terrain = selectObj.GetComponent<Terrain>();
+    //    MeshFilter[] mfs = selectObj.GetComponentsInChildren<MeshFilter>();
+    //    SkinnedMeshRenderer[] smrs = selectObj.GetComponentsInChildren<SkinnedMeshRenderer>();
+    //    Debug.Log(mfs.Length + "," + smrs.Length);
+    //    ExportSceneToObj(path, terrain, mfs, smrs, false, false);
+    //}
+
+    [MenuItem("ExportScene/Generate")]
+    [MenuItem("GameObject/ExportScene/Generate")]
+    public static void Generate()
     {
-        ExportSceneToObj(false);
+        ExportJson("map");
+        ExportObj("map");
+        GenerateNavMesh("map");
     }
 
-    [MenuItem("ExportScene/ExportSceneToObj(AutoCut)")]
-    [MenuItem("GameObject/ExportScene/ExportSceneToObj(AutoCut)")]
-    public static void ExportAutoCut()
+    static void ExportJson(string filename)
     {
-        ExportSceneToObj(true);
-    }
-
-    [MenuItem("ExportScene/ExportSelectedObj")]
-    [MenuItem("GameObject/ExportScene/ExportSelectedObj", priority = 44)]
-    public static void ExportObj()
-    {
-        GameObject selectObj = Selection.activeGameObject;
-        if (selectObj == null)
+        SpawnInfo blueSpawn = null, redSpawn = null;
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Spawn"))
         {
-            Debug.LogWarning("Select a GameObject");
-            return;
+            SpawnBuilder builder = obj.GetComponent<SpawnBuilder>();
+            if(builder.blueTeam)
+            {
+                blueSpawn = builder.GetInfo();
+            }
+            else
+            {
+                redSpawn = builder.GetInfo();
+            }
         }
-        string path = GetSavePath(false, selectObj);
-        if (string.IsNullOrEmpty(path)) return;
 
-        Terrain terrain = selectObj.GetComponent<Terrain>();
-        MeshFilter[] mfs = selectObj.GetComponentsInChildren<MeshFilter>();
-        SkinnedMeshRenderer[] smrs = selectObj.GetComponentsInChildren<SkinnedMeshRenderer>();
-        Debug.Log(mfs.Length + "," + smrs.Length);
-        ExportSceneToObj(path, terrain, mfs, smrs, false, false);
+        CoreInfo blueCore = null, redCore = null;
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Core"))
+        {
+            CoreBuilder builder = obj.GetComponent<CoreBuilder>();
+            if (builder.blueTeam)
+            {
+                blueCore = builder.GetInfo();
+            }
+            else
+            {
+                redCore = builder.GetInfo();
+            }
+        }
+
+        List<TowerInfo> towers = new List<TowerInfo>();
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Tower"))
+        {
+            towers.Add(obj.GetComponent<TowerBuilder>().GetInfo());
+        }
+
+        List<MonsterInfo> monsters = new List<MonsterInfo>();
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Monster"))
+        {
+            monsters.Add(obj.GetComponent<MonsterBuilder>().GetInfo());
+        }
+
+        List<MinionRelayPointInfo> minionRelayPoints = new List<MinionRelayPointInfo>();
+        foreach (var obj in GameObject.FindGameObjectsWithTag("MinionRelayPoint"))
+        {
+            minionRelayPoints.Add(obj.GetComponent<MinionRelayPointBuilder>().GetInfo());
+        }
+
+        List<EdgeInfo> edges = new List<EdgeInfo>();
+        foreach(var obj in GameObject.FindGameObjectsWithTag("Edge"))
+        {
+            edges.Add(obj.GetComponent<EdgeBuilder>().GetInfo());
+        }
+
+        List<CircleInfo> circles = new List<CircleInfo>();
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Circle"))
+        {
+            circles.Add(obj.GetComponent<CircleBuilder>().GetInfo());
+        }
+
+        List<BushInfo> bushes = new List<BushInfo>();
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Bush"))
+        {
+            bushes.Add(obj.GetComponent<BushBuilder>().GetInfo());
+        }
+
+        MapInfo mapInfo = new MapInfo() {
+            blueSpawn = blueSpawn,
+            redSpawn = redSpawn,
+            blueCore = blueCore,
+            redCore = redCore,
+            towers = towers.ToArray(),
+            monsters = monsters.ToArray(),
+            minionRelayPoints = minionRelayPoints.ToArray(),
+            edges = edges.ToArray(),
+            circles = circles.ToArray(),
+            bushes = bushes.ToArray()
+        };
+
+        string json = JsonConvert.SerializeObject(mapInfo);
+        StreamWriter sw = new StreamWriter(filename + ".json", false);
+        sw.WriteLine(json);
+        sw.Flush();
+        sw.Close();
+    }
+
+    static void ExportObj(string fileName)
+    {
+        Terrain terrain = UnityEngine.Object.FindObjectOfType<Terrain>();
+        MeshFilter[] mfs = UnityEngine.Object.FindObjectsOfType<MeshFilter>();
+        SkinnedMeshRenderer[] smrs = UnityEngine.Object.FindObjectsOfType<SkinnedMeshRenderer>();
+        ExportScene.ExportSceneToObj(fileName + ".obj", terrain, mfs, smrs, false, true);
+    }
+
+    static void GenerateNavMesh(string fileName)
+    {
+        NavMeshConfigurationFile file = new NavMeshConfigurationFile();
+        file.GenerationSettings.AgentRadius = 0.31f;
+        file.ExportPath = fileName + ".snj";
+        NavMeshConfigurationFile.MeshSettings loadMesh = new NavMeshConfigurationFile.MeshSettings() { Path = fileName + ".obj", Position = new float[3], Scale = 1.0f };
+        file.InputMeshes.Add(loadMesh);
+
+        List<string> meshes = new List<string>();
+        List<ObjModel> models = new List<ObjModel>();
+
+        foreach (var mesh in file.InputMeshes)
+        {
+            //Log.("Path:  " + mesh.Path, 2);
+            //Log.Debug("Scale: " + mesh.Scale, 2);
+            //Log.Debug("Position: " + mesh.Position.ToString(), 2);
+            meshes.Add(mesh.Path);
+
+            SharpNav.Geometry.Vector3 position = new SharpNav.Geometry.Vector3(mesh.Position[0], mesh.Position[1], mesh.Position[2]);
+
+            if (File.Exists(mesh.Path))
+            {
+                ObjModel obj = new ObjModel(mesh.Path);
+                float scale = mesh.Scale;
+                //TODO SCALE THE OBJ FILE
+                models.Add(obj);
+            }
+            else
+            {
+                //Log.Error("Mesh file does not exist.");
+                return;
+            }
+
+        }
+
+        var tris = Enumerable.Empty<SharpNav.Geometry.Triangle3>();
+        foreach (var model in models)
+            tris = tris.Concat(model.GetTriangles());
+
+        TiledNavMesh navmesh = NavMesh.Generate(tris, file.GenerationSettings);
+
+        new NavMeshJsonSerializer().Serialize(file.ExportPath, navmesh);
     }
 
     public static void ExportSceneToObj(bool autoCut)
